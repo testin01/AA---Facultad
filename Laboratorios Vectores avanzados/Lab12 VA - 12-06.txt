@@ -1,0 +1,50 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Dado un vector y su len, busque el valor 15 e indique si es o no el máximo del vector.
+*/
+
+int buscarMaximo(int vec[], int len);
+
+int main()
+{
+    int vector[10];
+    int len;
+
+    int p = buscar(vector, len, 15);
+
+    if (p == -1)
+    {
+        cout << "El valor 15 no se encuentra en el vector" << endl;
+    }
+    else
+    {
+        int pMax = buscarMaximo(vector, len);
+        if (vector[p] == vector[pMax])
+        {
+            cout << "El valor 15 es el máximo del vector" << endl;
+        }
+        else
+        {
+            cout << "El valor 15 no es el maximo del vector" << endl;
+        }
+    }
+
+    return 0;
+}
+
+int buscarMaximo(int vec[], int len)
+{
+    int posMax = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] > vec[posMax])
+        {
+            posMax = i;
+        }
+    }
+    return posMax;
+}

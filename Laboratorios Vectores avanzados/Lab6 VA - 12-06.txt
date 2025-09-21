@@ -1,0 +1,120 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Dado un lote de valores provistos por el usuario, que finalizan con 0, definir y cargar un vector
+    de 15 posiciones (de manera ordenada) y calcular:
+    a. Sumatoria
+    b. maximo
+    c. minimo
+    d. segundo vector que tenga la mitad de cada valor cargado
+    e. tercer vector con el doble de cada valor
+*/
+
+void cargarVector(int vector[], int &len, int cantPos);
+int buscarMinimo(int vec[], int len);
+int buscarMaximo(int vec[], int len);
+int calcularPromedio(int vec[], int len);
+int sumatoria(int vec[], int len);
+
+int main()
+{
+    int vector[15];
+    int len = 0;
+    int suma, pMax, pMin, vecMitad[15], lenMitad, vecDoble[15], lenDoble;
+
+    inicializarVector(vector, 15, 0);
+    cargarVector(vector, len, 15);
+    mostrarVector(vector, len);
+
+    suma = sumatoria(vector, len);
+    cout << "La suma de lo valores ingresados es: " << suma << endl;
+    pMax = buscarMaximo(vector, len);
+    cout << "El valor maximo ingresado es: " << vector[pMax] << endl;
+    pMin = buscarMinimo(vector, len);
+    cout << "El valor minimo ingresado es: " << vector[pMin] << endl;
+    inicializarVector(vecMitad, 15, 0);
+    lenMitad = len;
+    inicializarVector(vecDoble, 15, 0);
+    lenDoble = len;
+
+    for (int i = 0; i < len; i++)
+    {
+        vecMitad[i] = vector[i] / 2;
+        vecDoble[i] = vector[i] * 2;
+    }
+
+    mostrarVector(vecMitad, lenMitad);
+    mostrarVector(vecDoble, lenDoble);
+
+    return 0;
+}
+
+void cargarVector(int vector[], int &len, int cantPos)
+{
+    int n;
+    cout << "Ingrese un número a cargar, termine con 0" << endl;
+    cin >> n;
+
+    while (n != 0 && len < cantPos)
+    {
+        insertarOrdenado(vector, len, n);
+        cout << "Ingrese un número a cargar, termine con 0" << endl;
+        cin >> n;
+    }
+}
+
+int buscarMaximo(int vec[], int len)
+{
+    int posMax = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] > vec[posMax])
+        {
+            posMax = i;
+        }
+    }
+    return posMax;
+}
+
+int buscarMinimo(int vec[], int len)
+{
+    int posMinimo = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] < vec[posMinimo])
+        {
+            posMinimo = i;
+        }
+    }
+    return posMinimo;
+}
+
+int calcularPromedio(int vec[], int len)
+{
+    int sum = 0;
+
+    if (len != 0)
+    {
+        for (int i = 0; i < len; i++)
+        {
+            sum += vec[i];
+        }
+        return (sum / len);
+    }
+    else
+        return 0;
+}
+
+int sumatoria(int vec[], int len)
+{
+    int sum = 0;
+    for (int i = 0; i < len; i++)
+    {
+        sum += vec[i];
+    }
+    return sum;
+}

@@ -1,0 +1,41 @@
+/*
+ *  Cantidad de promocionados
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("K1151.dat", "rb");
+    Alumno raux;
+    int promocionados = 0;
+
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    while (!feof(Alum))
+    {
+        if (raux.nota1 >= 8 && raux.nota2 >= 8)
+        {
+            promocionados++;
+        }
+
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+
+    cout << "La cantidad de alumnos que consiguieron la promocion es de " << promocionados << endl;
+
+    return 0;
+}

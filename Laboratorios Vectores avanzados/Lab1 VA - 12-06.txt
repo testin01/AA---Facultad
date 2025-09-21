@@ -1,0 +1,46 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+// Dado un vector "Prueba 1" y su len, busque el valor mínimo e imprímalo por pantalla
+
+int buscarMinimo(int vec[], int len, int &posMinimo);
+
+int main()
+{
+    int prueba1[10];
+    int len;
+    int pMin;
+
+    pMin = buscarMinimo(prueba1, len, pMin);
+
+    cout << "El valor minimo es " << pMin << endl;
+    return 0;
+}
+
+/*void buscarMinimo(int vec[], int len, int &posMinimo)
+{
+    posMinimo = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] < vec[posMinimo])
+        {
+            posMinimo = i;
+        }
+    }
+}*/
+
+int buscarMinimo(int vec[], int len, int &posMinimo)
+{
+    posMinimo = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] < vec[posMinimo])
+        {
+            posMinimo = i;
+        }
+    }
+    return posMinimo;
+}

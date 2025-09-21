@@ -1,0 +1,44 @@
+/*
+ *  Cantidad de desaprobados del 1P y del 2P
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("K1151.dat", "rb");
+    Alumno raux;
+    int des1P = 0, des2P = 0;
+
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    while (!feof(Alum))
+    {
+        if (raux.nota1 < 6)
+        {
+            des1P++;
+        }
+        else if (raux.nota2 < 6)
+        {
+            des2P++;
+        }
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+
+    cout << "La cantidad de desaprobados al primer parcial son " << des1P << " y al segundo parcial " << des2P << endl;
+
+    return 0;
+}

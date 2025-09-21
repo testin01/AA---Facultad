@@ -1,0 +1,79 @@
+estructuras dinamicas & punteros
+
+puntero -> variable que tiene capacidad unica, contener una direccion de memoria
+
+eg:
+int a = 10; // declaro a y le asigno el valor 10
+int* p = &a; // declaro p y le asigno "la direccion de a" 
+cout << *p << endl; // muestro 10
+
+nodo -> estructura autoreferenciada que, ademas de contener los datos propiamente
+dichos, posee al menos un campo con la direccion de otro nodo del mismo tipo
+
+struct Nodo{
+    int info; // valor que contiene el nodo
+    Nodo* sig; // puntero al siguiente nodo
+};
+
+Nodo* p = new Nodo();
+(*p).info = 10;
+p->info = 10; // es equivalente a la previa
+
+Estructuras:
+ Pila -> busca invertir el orden, tiene 1 solo puntero, movimiento last in first out, ops: agregar y sacar y es restrictiva
+ Cola -> busca mantener el orden, tiene 2 punteros, mov. first in first out, ops. agregar y sacar y es restrictiva
+ Lista -> objetivo variado, 1 solo puntero, movimiento libre, ops. libres, no es restrictivo
+
+Operaciones para Pilas:
+
+// agregar nodo
+void push(Nodo *&pila, int valor)
+{
+    // cargar nodo
+    Nodo *p = new Nodo(); // Pedido de memoria
+    p->info = valor;      // cargamos en el nodo el valorr que me pasaron
+    p->sgte = pila;       // apunta al ultimo
+
+    // enlazar el nodo
+    pila = p;
+}
+
+// eliminar nodo
+int pop(Nodo *&pila)
+{
+    int ret = pila->info; // asegurás el retorno
+    // eliminar el nodo
+    Nodo *aux = pila;
+    pila = pila->sgte; // pila = aux->sgte;
+    delete (aux);
+    // acomodar puntero
+    return ret;
+}
+
+// carga e impresión formales
+int main()
+{
+    Nodo *pila = NULL; // Definicion de la pila
+    int rdo;
+    int carga;
+
+    push(pila, 1);
+    push(pila, 2);
+    push(pila, 3);
+
+    cout << "Ingrese un valor o termine con 0 " << endl;
+    cin >> carga;
+    while (carga != 0)
+    {
+        push(pila, carga);
+        cout << "Ingrese un valor o termine con 0 " << endl;
+        cin >> carga;
+    }
+
+    while (pila != NULL)
+    {
+        rdo = pop(pila);
+        cout << "Valor: " << rdo << endl;
+    }
+    return 0;
+}

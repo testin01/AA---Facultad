@@ -1,0 +1,40 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Defina un vector de 20 posiciones y cárguelo con los valores indicados por el usuario.
+    Se sabe que el usuario sólo compartirá valores positivos (controlar cuándo finaliza la carga).
+*/
+
+void cargarVector(int vector[], int &len);
+
+int main()
+{
+    int vector[20];
+    int len = 0;
+
+    inicializarVector(vector, 20, 0);
+    cargarVector(vector, len);
+
+    mostrarVector(vector, len);
+
+    return 0;
+}
+
+void cargarVector(int vector[], int &len)
+{
+    int valorACargar;
+    int n;
+    int i = 0;
+    cout << "Ingrese un número a cargar" << endl;
+    cin >> n;
+    while (n > 0 && i < 20)
+    {
+        vector[i] = n;
+        i++;
+        len++;
+        cout << "Ingrese un número a cargar" << endl;
+        cin >> n;
+    }
+}

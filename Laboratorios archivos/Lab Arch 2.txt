@@ -1,0 +1,39 @@
+/*
+ *  Sumatoria de todas las notas del primer parcial
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("K1151.dat", "rb");
+    Alumno raux;
+    int cont = 0;
+
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    while (!feof(Alum))
+    {
+        if (raux.nota1 >= 6)
+        {
+            cont++;
+        }
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+    cout << "La cantidad de aprobados al primer parcial son " << cont << endl;
+
+    return 0;
+}

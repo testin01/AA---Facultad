@@ -1,0 +1,113 @@
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1P;
+    int nota2P;
+};
+
+struct RAlumno
+{
+    Alumno alum;
+    int prom;
+};
+
+int buscarNotaMaxima(int notaMax, Alumno raux);
+int buscarNotaMinima(int notaMin, Alumno raux);
+void calcularPromedioAlumno(RAlumno promedios[], int len, Alumno curso[]);
+int calcularPromedioCurso(Alumno vector[], int len);
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("Notas.dat", "rb");
+
+    Alumno curso[40];
+    RAlumno promedios[40];
+    int lenCurso = 0, lenPromedios = 0;
+    int notaMax = 1;
+    int notaMin = 10;
+
+    Alumno raux;
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    inicializarVector(curso, 40, 0);
+    inicializarVector(promedios, 40, 0);
+
+    while (!feof(Alum))
+    {
+        notaMax = buscarNotaMaxima(notaMax, raux);
+        notaMin = buscarNotaMinima(notaMin, raux);
+        insertarOrdenado(curso, lenCurso, raux);
+
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+
+    int prom = calcularPromedioCurso(curso, lenCurso);
+    calcularPromedioAlumno(promedios, lenPromedios, curso); // Calculamos promedios y ordenamos por nro. legajo
+
+    mostrarVector(promedios, lenPromedios); // mostramos el promedio de cada alumno
+    cout << "El promedio del curso es de " << prom << ". " << endl;
+
+    return 0;
+}
+
+int buscarNotaMaxima(int notaMax, Alumno raux)
+{
+    if (notaMax < raux.nota1P)
+    {
+        notaMax = raux.nota1P;
+    }
+    else if (notaMax < raux.nota2P)
+    {
+        notaMax = raux.nota2P;
+    }
+    return notaMax;
+}
+
+int buscarNotaMinima(int notaMin, Alumno raux)
+{
+    if (notaMin > raux.nota1P)
+    {
+        notaMin = raux.nota1P;
+    }
+    else if (notaMin > raux.nota2P)
+    {
+        notaMin = raux.nota2P;
+    }
+    return notaMin;
+}
+
+void calcularPromedioAlumno(RAlumno promedios[], int len, Alumno curso[])
+{
+    RAlumno aux;
+    for (int i = 0; i < len; i++)
+    {
+        aux.alum.dni = curso[i].dni;
+        aux.alum.legajo = curso[i].legajo;
+        aux.alum.nota1P = curso[i].nota1P;
+        aux.alum.nota2P = curso[i].nota2P;
+        aux.prom = (curso[i].nota1P + curso[i].nota2P) / 2;
+
+        insertarOrdenado(promedios, len, aux);
+    }
+}
+
+int calcularPromedioCurso(Alumno curso[], int len)
+{
+    int sum = 0, cont = 0;
+    for (int i = 0; i < len; i++)
+    {
+        sum += curso[i].nota1P + curso[i].nota2P;
+        cont += 2;
+    }
+
+    return (sum / cont);
+}

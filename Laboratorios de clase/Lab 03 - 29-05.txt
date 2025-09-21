@@ -1,0 +1,66 @@
+/*Vectores 3
+   Crear un vector de 5 pos, le pido al usuario que me de los valores y mostrar la cantidad de valores mayores a 5 que se ingresaron
+*/
+
+#include <iostream>
+using namespace std;
+
+void inicializarVector(int vector[], int cantPos, int valorInit);
+void cargaMasiva(int vector[], int &len, int cantPos);
+void mayor5(int vector[], int &mayores, int cantPos);
+void mostrarVector(int vector[], int len);
+
+int main()
+{
+    // Paso 1: Definir el vector
+    int vec[5];
+    int len = 0;
+    int mayores = 0;
+    // Paso 2: Inicializar
+    inicializarVector(vec, 5, 0);
+    // Paso 3: Cargar
+    cargaMasiva(vec, len, 5);
+    // Paso 4: Promediar el vector
+    mayor5(vec, mayores, 5);
+    // Paso 5: Mostrar el result. y el vector
+    mostrarVector(vec, len);
+    cout << "La cantidad de valores ingresados mayores a 5 es: " << mayores << endl;
+    return 0;
+}
+
+void inicializarVector(int vector[], int cantPos, int valorInit)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        vector[i] = valorInit;
+    }
+}
+
+void cargaMasiva(int vector[], int &len, int cantPos)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        cout << "Ingresar un valor: " << endl;
+        cin >> vector[i];
+        len++;
+    }
+}
+
+void mayor5(int vector[], int &may, int cantPos)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        if (vector[i] > 5)
+        {
+            may++;
+        }
+    }
+}
+
+void mostrarVector(int vector[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << "El valor de v[" << i << "] es: " << vector[i] << endl;
+    }
+}

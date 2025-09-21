@@ -1,0 +1,16 @@
+En las instituciones educativas, la falta de un sistema centralizado
+para gestionar la información de los alumnos genera confusiones en 
+la asignación de grupos, así como desacuerdos sobre calificaciones y
+promedios. Esto resulta en frustración tanto para los docentes como 
+para los padres y alumnos, dificultando la comunicación y el seguimiento
+del rendimiento académico. 
+Para solucionar este problema, decidieron implementar la suba de archivos
+a la nube para poder tener las notas documentadas, el archivo se llama Notas.dat
+y contiene el legajo del alumno, las notas de 1er y 2do parcial, y el DNI del alumno.
+Y se sabe que los cursos tienen una capacidad de 40 alumnos.
+Pero ahora quieren poder calcular distintas estadísticas:
+•	Nota máxima del curso – con legajo del que la obtuvo
+•	Nota mínima del curso – con legajo del que la obtuvo
+•	Promedio por alumno
+•	Promedio del curso
+Se pide que la muestra de las distintas estadísticas esté ordenada por nro. de legajo.

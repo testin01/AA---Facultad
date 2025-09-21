@@ -1,0 +1,37 @@
+/*
+ *   Indicar quiénes son los promocionados mostrando Legajo
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("K1151.dat", "rb");
+    Alumno raux;
+
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    while (!feof(Alum))
+    {
+        if (raux.nota1 >= 8 && raux.nota2 >= 8)
+        {
+            cout << "El alumno con legajo " << raux.legajo << " promocionó Algoritmos y Estructuras de Datos" << endl;
+        }
+
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+    return 0;
+}

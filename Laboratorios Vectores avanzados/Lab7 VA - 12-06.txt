@@ -1,0 +1,70 @@
+/*
+    Cargue un vector de 10 posiciones con los valores provistos por el usuario, éste sólo dará valores negativos (controlar cuando finaliza la carga)
+    a. Genere un segundo vector que contenga los valores del original pero positivos
+    b. Genere un tercer vector que contenga los valores +2
+    c. Genere un cuarto vector que contenga los valores multiplicados por 2
+    d. Genere un quinto vector que contenga los valores -1
+*/
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+void cargarVector(int vector[], int &len);
+
+int main()
+{
+    int vector[10], vecPositivo[10], vecMas2[10], vecPor2[10], vecMenos1[10];
+    int len = 0, lenPos = 0, lenMas = 0, lenPor = 0, lenMenos = 0;
+
+    inicializarVector(vector, len, 0);
+    cargarVector(vector, len);
+
+    for (int i = 0; i < len; i++)
+    {
+        vecPositivo[i] = vector[i] * -1;
+        vecMas2[i] = vector[i] + 2;
+        vecPor2[i] = vector[i] * 2;
+        vecMenos1[i] = vector[i] - (-1);
+    }
+
+    lenPos = len;
+    lenMas = len;
+    lenPor = len;
+    lenMenos = len;
+
+    cout << "El vector base es: " << endl;
+    mostrarVector(vector, len);
+    cout << endl;
+    cout << "El vector positivo es: " << endl;
+    cout << endl;
+    mostrarVector(vecPositivo, lenPos);
+    cout << "El vector mas 2 es: " << endl;
+    cout << endl;
+    mostrarVector(vecMas2, lenMas);
+    cout << "El vector por 2 es: " << endl;
+    cout << endl;
+    mostrarVector(vecPor2, lenPor);
+    cout << "El vector menos 1 es: " << endl;
+    cout << endl;
+    mostrarVector(vecMenos1, lenMenos);
+
+
+    return 0;
+}
+
+void cargarVector(int vector[], int &len)
+{
+    int n;
+    int i = 0;
+    cout << "Ingrese el valor a cargar: ";
+    cin >> n;
+
+    while (i < 10 && n < 0)
+    {
+        vector[i] = n;
+        len++;
+        i++;
+        cout << "Ingrese el valor a cargar: ";
+        cin >> n;
+    }
+}

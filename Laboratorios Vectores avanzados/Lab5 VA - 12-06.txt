@@ -1,0 +1,39 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Defina un vector de 10 posiciones y cárguelo con los valores provistos por el usuario,
+    se sabe que el mismo dará valores entre 1 – 100 (controlar cuando finaliza la carga)
+*/
+
+void cargarVector(int vector[], int &len);
+
+int main()
+{
+    int vector[10];
+    int len = 0;
+
+    inicializarVector(vector, 10, 0);
+    cargarVector(vector, len);
+
+    mostrarVector(vector, len);
+
+    return 0;
+}
+
+void cargarVector(int vector[], int &len)
+{
+    int n;
+    int i = 0;
+    cout << "Ingrese un número a cargar" << endl;
+    cin >> n;
+    while (n > 0 && n <= 100 && i < 10)
+    {
+        vector[i] = n;
+        i++;
+        len++;
+        cout << "Ingrese un número a cargar" << endl;
+        cin >> n;
+    }
+}

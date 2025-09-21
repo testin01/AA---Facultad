@@ -1,0 +1,65 @@
+/*
+    Vectores 1
+   Crear un vector de 5 pos, le pido al usuario que me de los valores y calculo la sumatoria
+*/
+
+#include <iostream>
+using namespace std;
+
+void inicializarVector(int vector[], int cantPos, int valorInit);
+void cargaMasiva(int vector[], int &len, int cantPos);
+void sumarizarVector(int vector[], int &sum, int cantPos);
+void mostrarVector(int vector[], int len);
+
+int main()
+{
+    // Paso 1: Definir el vector
+    int vec[5];
+    int len = 0;
+    int sum = 0;
+
+    // Paso 2: Inicializar
+    inicializarVector(vec, 5, 0);
+    // Paso 3: Cargar
+    cargaMasiva(vec, len, 5);
+    // Paso 4: Sumarizar el vector
+    sumarizarVector(vec, sum, 5);
+    // Paso 5: Mostrar el result. y el vector
+    mostrarVector(vec, len);
+    cout << "La suma de los valores ingresados es de " << sum << endl;
+    return 0;
+}
+
+void inicializarVector(int vector[], int cantPos, int valorInit)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        vector[i] = valorInit;
+    }
+}
+
+void cargaMasiva(int vector[], int &len, int cantPos)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        cout << "Ingresar un valor: " << endl;
+        cin >> vector[i];
+        len++;
+    }
+}
+
+void sumarizarVector(int vector[], int &sum, int cantPos)
+{
+    for (int i = 0; i < cantPos; i++)
+    {
+        sum += vector[i];
+    }
+}
+
+void mostrarVector(int vector[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        cout << "El valor de v[" << i << "] es: " << vector[i] << endl;
+    }
+}

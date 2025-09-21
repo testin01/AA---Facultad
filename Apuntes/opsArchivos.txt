@@ -1,0 +1,64 @@
+Se debe agregar la librería <stdio.h>
+
+FILE* Alum; 
+    -> FILE es el tipo de puntero
+    -> * Es el que me indica que estoy creando un puntero
+    -> Alum Es el nombre del puntero
+
+Alum = fopen("K1151.dat","wb"); Abre el archivo para leer (rb) o para escribir (wb), rb+ para escritura y luego escribir y wb+ para escribir y luego leer
+
+Alumno raux; Se crea un registro para leer y procesar un registro del archivo
+fread(&raux,sizeof(struct Alumno),1,Alum); Función para leer cada registro del archivo
+fread(Direccion de memoria del registro auxiliar que cree,sizeof(tipo de dato o tamaño del bloque que esta leyendo),cantidad de bloques,Puntero FILE*)
+feof(Alum); // funcion booleana que devuelve verdadero o falso dependiendo de si es el ultimo registro o no
+
+// Lectura
+fread(&raux,sizeof(struct Alumno),1,Alum);
+
+while(!feof(Alum){
+// Procesamiento de archivos...
+    sumatoria = sumatoria + raux.nota1;
+
+    fread(&raux,sizeof(struct Alumno),1,Alum);
+}
+
+fclose(Alum); Cierra el archivo
+
+/***************************************************************************************************************************************************************************/
+Ejemplo
+
+/*
+ *  Sumatoria de todas las notas del primer parcial
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *K1151;
+    K1151 = fopen("K1151.dat", "rb");
+
+    Alumno raux;
+    fread(&raux, sizeof(struct Alumno), 1, K1151);
+
+    int sumatoria = 0;
+    while (!feof(K1151))
+    {
+        sumatoria += (raux.nota1 + raux.nota2);
+
+        fread(&raux, sizeof(struct Alumno), 1, K1151);
+    }
+
+    fclose(K1151);
+    return 0;
+}

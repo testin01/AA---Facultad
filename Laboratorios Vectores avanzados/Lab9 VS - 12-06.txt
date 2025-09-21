@@ -1,0 +1,28 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Dado un vector y su len, busque si se encuentra el valor 3.
+*/
+
+void cargarVector(int vector[], int &len, int cantPos);
+
+int main()
+{
+    int vector[10];
+    int len;
+
+    int p = buscar(vector, len, 3);
+
+    if (p == -1)
+    {
+        cout << "El valor 3 no se encuentra en el vector" << endl;
+    }
+    else
+    {
+        cout << "El valor 3 se encuentra en la posicion " << p << endl;
+    }
+
+    return 0;
+}

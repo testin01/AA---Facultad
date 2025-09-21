@@ -1,0 +1,28 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Dado un vector y su len, busque y elimine si se encuentra el valor 5
+*/
+
+//void cargarVector(int vector[], int &len, int cantPos);
+
+int main()
+{
+    int vector[10];
+    int len;
+
+    int p = buscar(vector, len, 5);
+
+    if (p == -1)
+    {
+        cout << "El valor 5 no se encuentra en el vector" << endl;
+    }
+    else
+    {
+        eliminar(vector,len,p);
+    }
+
+    return 0;
+}

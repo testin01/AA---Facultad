@@ -1,0 +1,38 @@
+/*
+    Dado un lote de valores ingresados por el usuario cárguelos a un vector (se sabe que
+    máximo podrá ingresar 10 valores y la carga finaliza con el ingreso de -1) de manera
+    ordenada
+*/
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+void cargarVector(int vec[], int &len, int cantPos);
+
+int main()
+{
+    int vector[10];
+    int len = 0;
+
+    cargarVector(vector, len, 10);
+
+    mostrarVector(vector, len);
+
+    return 0;
+}
+
+void cargarVector(int vector[], int &len, int cantPos)
+{
+    int n;
+    cout << "Ingrese un número a cargar, termine con -1" << endl;
+    cin >> n;
+
+    while (n != -1 && len < cantPos)
+    {
+        insertarOrdenado(vector, len, n);
+        len++;
+        cout << len << endl;
+        cout << "Ingrese un número a cargar, termine con -1" << endl;
+        cin >> n;
+    }
+}

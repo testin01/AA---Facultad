@@ -1,0 +1,238 @@
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Nodo
+{
+    int info;
+    Nodo *sgte;
+};
+
+// Procedimiento que agregue elem a la cola
+void agregar(Nodo *&cfte, Nodo *&cfin, int valor);
+// Procedimiento que extraiga info del nodo de la cola
+int suprimir(Nodo *&cfte, Nodo *&cfin); // devuelve el tinfo
+
+int main()
+{
+    // Defino la cola -> Crear los 2 punteros
+    Nodo *colafte = NULL;
+    Nodo *colafin = NULL;
+
+    // Cargar la cola
+    int carga;
+    cout << "Ingrese un valor o termine con 0" << endl;
+    cin >> carga;
+
+    while (carga != 0)
+    {
+        agregar(colafte, colafin, carga);
+        cout << "Ingrese un valor o termine con 0" << endl;
+        cin >> carga;
+    }
+
+    /* agregar(colafte, colafin, 1);
+    agregar(colafte, colafin, 2);
+    agregar(colafte, colafin, 3); */
+
+    // Vaciar la cola y mostrar los valores
+    int aux;
+    while (colafte != NULL)
+    {
+        aux = suprimir(colafte, colafin);
+        cout << "El valor de la cola es: " << aux << endl;
+    }
+    return 0;
+}
+
+void agregar(Nodo *&cfte, Nodo *&cfin, int valor)
+{
+    // Cargar el nodo y cargarlo
+    Nodo *nuevo = new Nodo(); // Pedido de memoria para el nodo
+    nuevo->info = valor;
+    nuevo->sgte = NULL;
+
+    // Enlazo en la estructura
+    if (cfte == NULL) // significa que la cola está vacia
+    {
+        cfte = nuevo;
+    }
+    else
+    {
+        cfin->sgte = nuevo;
+    }
+    cfin = nuevo;
+}
+
+int suprimir(Nodo *&cfte, Nodo *&cfin)
+{
+    // aseguro el retorno
+    int ret = cfte->info;
+    // liberar la memoria usada para el nodo eliminado y actualizar el o los punteros
+    Nodo *aux = cfte;
+    cfte = cfte->sgte;
+    if (cfte == NULL) // escenario anómalo
+    {
+        cfin = NULL; // actualizo solamente porque se acabó la cola
+    }
+    delete (aux);
+    return ret;
+}
+
+/************************************************************************************************************************************************************************************/
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Nodo
+{
+    int info;
+    Nodo *sgte;
+};
+
+void agregarPrimero(Nodo *&Lista, int valor);
+void agregarNodo(Nodo *&Lista, int valor); // Agregar al final
+void mostrar(Nodo *Lista);
+void liberar(Nodo *&Lista);
+Nodo *buscar(Nodo *Lista, int valor);
+int eliminarPrimerNodo(Nodo *&Lista);
+void insertarOrdenado(Nodo *&Lista, int valor);
+
+int main()
+{
+    Nodo *Lista = NULL;
+    int carga;
+    cout << "Ingrese un valor o termine con 0" << endl;
+    cin >> carga;
+
+    while (carga != 0)
+    {
+        insertarOrdenado(Lista, carga);
+        cout << "Ingrese un valor o termine con 0" << endl;
+        cin >> carga;
+    }
+    Nodo *aux2;
+    aux2 = buscar(Lista, 12);
+    if (aux2 == NULL)
+    {
+        cout << "No se encontró el 12" << endl;
+    }
+    else
+    {
+        cout << "Se encontró el 12" << endl;
+    }
+    mostrar(Lista);
+    liberar(Lista);
+    return 0;
+}
+
+void agregarPrimero(Nodo *&Lista, int valor)
+{
+    // Crear el nodo y cargarlo
+    Nodo *nuevo = new Nodo();
+    nuevo->info = valor;
+    nuevo->sgte = NULL;
+
+    // enlazar la lista
+    if (Lista != NULL) // Lista cargada
+    {
+        nuevo->sgte = Lista;
+    }
+    Lista = nuevo; // Lista vacia
+}
+
+void agregarNodo(Nodo *&Lista, int valor)
+{
+    // Crear el nodo y cargarlo
+    Nodo *nuevo = new Nodo();
+    nuevo->info = valor;
+    nuevo->sgte = NULL;
+
+    // enlace
+    if (Lista == NULL)
+    {
+        Lista = nuevo;
+    }
+    else // Recorro hasta encontrar el final de la lista
+    {
+        Nodo *aux = Lista;
+        while (aux->sgte != NULL)
+        {
+            aux = aux->sgte;
+        } // Ya tengo el último NODO
+        aux->sgte = nuevo;
+    }
+}
+
+void mostrar(Nodo *Lista)
+{
+    Nodo *aux = Lista;
+    while (aux != NULL)
+    {
+        cout << "El valor de la lista es " << aux->info << endl;
+        aux = aux->sgte;
+    }
+}
+
+void liberar(Nodo *&Lista)
+{
+    Nodo *aux;
+    while (Lista != NULL)
+    {
+        aux = Lista;
+        Lista = Lista->sgte;
+        delete (aux);
+    }
+}
+
+Nodo *buscar(Nodo *Lista, int valor)
+{
+    Nodo *aux = Lista;
+    while (aux != NULL && valor != aux->info)
+    {
+        aux = aux->sgte;
+    }
+    return aux;
+}
+
+int eliminarPrimerNodo(Nodo *&Lista)
+{
+    // Asegurar retorno
+    int ret = Lista->info;
+    // Liberar memoria y dejar lista enlazada
+    Nodo *aux = Lista;
+    Lista = Lista->sgte;
+    delete (aux);
+
+    return ret;
+}
+
+void insertarOrdenado(Nodo *&Lista, int valor)
+{
+    // Crear el nodo y cargarlo
+    Nodo *nuevo = new Nodo();
+    nuevo->info = valor;
+    nuevo->sgte = NULL;
+
+    // Enlazarlo (encontrar el lugar donde debo insertarlo)
+    Nodo *nodoAnterior = NULL;
+    Nodo *aux = Lista;
+
+    while (aux != NULL && aux->info < valor)
+    {
+        nodoAnterior = aux;
+        aux = aux->sgte;
+    }
+
+    if (nodoAnterior == NULL)
+    {
+        Lista = nuevo;
+    }
+    else
+    {
+        nodoAnterior->sgte = nuevo;
+    }
+    nuevo->sgte = aux;
+}

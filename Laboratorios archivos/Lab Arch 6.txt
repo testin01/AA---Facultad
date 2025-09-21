@@ -1,0 +1,48 @@
+/*
+ *   Calcular el promedio por cada alumno (N1 y N2) y mostrar por pantalla si promocionó o no.
+ */
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+struct Alumno
+{
+    int legajo;
+    int dni;
+    int nota1;
+    int nota2;
+};
+
+int main()
+{
+    FILE *Alum;
+    Alum = fopen("K1151.dat", "rb");
+    int promedio = 0;
+    bool promocion = false;
+    Alumno raux;
+
+    fread(&raux, sizeof(struct Alumno), 1, Alum);
+
+    while (!feof(Alum))
+    {
+        promedio = (raux.nota1 + raux.nota2) / 2;
+        if (raux.nota1 >= 8 && raux.nota2 >= 8)
+        {
+            promocion = true;
+        }
+        else
+        {
+            promocion = false;
+        }
+        if (promocion == true)
+            cout << "El alumno de legajo " << raux.legajo << " obtuvo un promedio de " << promedio << " y promocionó la materia." << endl;
+        else
+            cout << "El alumno de legajo " << raux.legajo << " obtuvo un promedio de " << promedio << " y NO promocionó la materia." << endl;
+
+        fread(&raux, sizeof(struct Alumno), 1, Alum);
+    }
+
+    fclose(Alum);
+    return 0;
+}

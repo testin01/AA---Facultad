@@ -1,0 +1,167 @@
+#include <iostream>
+#include <stdio.h>
+#include "principal.hpp"
+using namespace std;
+
+bool esMundialista(int anio);
+void promedio(int nota1, int nota2, int nota3);
+
+// Ejercicio 4
+struct Semilla
+{
+    int codSemilla;
+    int cantKGs;
+};
+
+void kgProducidosMax(Semilla sem[], int len);
+void kgProducidosMin(Semilla sem[], int len);
+void promKgGenerados(Semilla sem[], int len);
+
+// Ejercicio 5 
+
+struct Producto
+{
+    int COD_PROD;
+    char prodType;
+    int peso;
+};
+
+struct Producto2
+{
+    int COD_PROD;
+    int peso;
+};
+
+int main()
+{   
+//  Ejericio 4
+    Semilla sem[1500];
+    int len;
+
+    kgProducidosMax(sem, len);
+    kgProducidosMin(sem, len);
+    promKgGenerados(sem, len);
+
+// Ejercicio 5
+
+    FILE *Productos, *Fragiles, *Standard;
+    Productos = fopen("Deposito", "rb");
+    Fragiles = fopen("Fragiles", "wb");
+    Standard = fopen("Standard", "wb");
+
+    Producto raux;
+    Producto2 rcarga;
+    fread(&raux, sizeof(Producto), 1, Productos);
+
+    while (!feof(Productos))
+    {
+        if (raux.prodType == 'F')
+        {
+            rcarga.COD_PROD = raux.COD_PROD;
+            rcarga.peso = rcarga.peso;
+            fwrite(&rcarga, sizeof(Producto2), 1, Fragiles);
+        }
+        if (raux.prodType == 'S')
+        {
+            rcarga.COD_PROD = raux.COD_PROD;
+            rcarga.peso = raux.peso;
+            fwrite(&rcarga, sizeof(Producto2), 1, Standard);
+        }
+
+        fread(&raux, sizeof(Producto), 1, Productos);
+    }
+
+    fclose(Productos);
+    fclose(Fragiles);
+    fclose(Standard);
+
+    return 0;
+}
+// Practica
+// Ejercicio 1 - Desarrolle una función que determine si un año es mundialista
+
+/*bool esMundialista(int anio)
+{   
+    bool ret = false;
+    if (anio % 4 != 0 && anio % 2 == 0)
+    {
+        ret = true;
+    }
+    return ret;
+}*/
+
+// Ejercicio 2 - Desarrolle un procedimiento que dadas 3 notas muestre el promedio
+void promedio(int nota1, int nota2, int nota3)
+{
+    int promedio = (nota1 + nota2 + nota3) / 3;
+
+    cout << "El promedio calculado es de " << promedio << endl;
+}
+
+// Ejercicio 3 - Defina los siguientes registros, defina 1 variable para la implementación de
+// cada uno y cargarle valores a elección en un programa principal.
+// Padrón electoral
+//      DNI; Nombre y Apellido; Número de Mesa; Número de Orden
+// Alumno
+//      Legajo; Nombre y Apellido; Materia; Nota de aprobación
+struct PElectoral
+{
+    int DNI;
+    char nombre[10];
+    char apellido[10];
+    int nroMesa;
+    int nroOrden;
+};
+PElectoral x;
+
+struct Alumno
+{
+    int legajo;
+    char nombre[10];
+    char apellido[10];
+    char materia[20];
+    int notaApproved;
+};
+Alumno a;
+
+// Ejercicio 4
+void kgProducidosMax(Semilla sem[], int len)
+{
+    int posMax = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (sem[i].cantKGs > sem[posMax].cantKGs)
+        {
+            posMax = i;
+        }
+    }
+
+    cout << "La semilla que más kilos produjo es " << sem[posMax].codSemilla << endl;
+}
+void kgProducidosMin(Semilla sem[], int len)
+{
+    int posMin = 0;
+    for (int i = 0; i < len; i++)
+    {
+        if (sem[i].cantKGs < sem[posMin].cantKGs)
+        {
+            posMin = i;
+        }
+    }
+
+    cout << "La semilla que menos kilos tiene es " << sem[posMin].codSemilla << endl;
+}
+void promKgGenerados(Semilla sem[], int len)
+{
+    int cont = 0;
+    int acum = 0;
+    for (int i = 0; i < len; i++)
+    {
+        acum += sem[i].cantKGs;
+        cont++;
+    }
+
+    int promedio = acum / cont;
+
+    cout << "El promedio de kilos generados por semilla es de " << promedio << " KGs." << endl;
+}

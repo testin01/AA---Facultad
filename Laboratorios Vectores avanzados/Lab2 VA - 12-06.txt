@@ -1,0 +1,33 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+// Dado un vector "Prueba 2" y su len, busque el valor máximo e imprímalo por pantalla
+
+int buscarMaximo(int vec[], int len, int &posMax);
+
+int main()
+{
+    int prueba2[10];
+    int len;
+    int pMax;
+
+    pMax = buscarMaximo(prueba2, len, pMax);
+
+    cout << "El valor maximo es " << prueba2[pMax] << endl;
+    return 0;
+}
+
+int buscarMaximo(int vec[], int len, int &posMax)
+{
+    posMax = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] > vec[posMax])
+        {
+            posMax = i;
+        }
+    }
+    return posMax;
+}

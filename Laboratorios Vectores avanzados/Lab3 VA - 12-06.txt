@@ -1,0 +1,73 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+// Se tiene un vector y su len, con las notas de los estudiantes. Se pide que muestre: mejor nota, peor nota y el promedio de las notas cargadas, y la cantidad de notas cargadas
+
+int buscarMinimo(int vec[], int len);
+int buscarMaximo(int vec[], int len);
+int calcularPromedio(int vec[], int len);
+
+int main()
+{
+    int notas[50];
+    int len;
+    int nMax;
+    int nMin;
+    int prom;
+    int cantidad;
+
+    nMin = buscarMinimo(notas, len);
+    cout << "La nota mas baja es " << notas[nMin] << endl;
+    nMax = buscarMaximo(notas, len);
+    cout << "La nota mas alta es " << notas[nMax] << endl;
+    prom = calcularPromedio(notas, len);
+    cout << "El promedio de las notas es " << prom << endl;
+    cout << "La cantidad de notas cargadas es: " << len << endl;
+
+    return 0;
+}
+
+int buscarMaximo(int vec[], int len)
+{
+    int posMax = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] > vec[posMax])
+        {
+            posMax = i;
+        }
+    }
+    return posMax;
+}
+
+int buscarMinimo(int vec[], int len)
+{
+    int posMinimo = 0;
+
+    for (int i = 1; i < len; i++)
+    {
+        if (vec[i] < vec[posMinimo])
+        {
+            posMinimo = i;
+        }
+    }
+    return posMinimo;
+}
+
+int calcularPromedio(int vec[], int len)
+{
+    int sum = 0;
+
+    if (len != 0)
+    {
+        for (int i = 0; i < len; i++)
+        {
+            sum += vec[i];
+        }
+        return (sum / len);
+    }
+    else
+        return 0;
+}

@@ -1,0 +1,53 @@
+Operaciones: 
+    void insertar(int vec[], int &len, int valor, int pos)
+    {
+        for (int i = len; i > pos; i--)
+        {
+            vec[i] = vec[i - 1];
+        }
+        vec[pos] = valor;
+        len++;
+    }
+/***************************************************************/
+    void insertarOrdenado(int vec[], int &len, int valor)
+    {
+        // Definir donde se inserta
+        int i = 0;
+        while (i < len && vec[i] <= valor)
+        {
+            i++;
+        }
+
+        // Hacer la insercion
+        if (i == len)
+        {
+            vec[len] = valor;
+        }
+        else
+            insertar(vec, len, valor, i);
+    }
+/***************************************************************/
+    int buscar(int vec[], int len, int valor)
+    {
+        int ret = -1;
+        int i = 0;
+        while (i < len && vec[i] != valor)
+        {
+            i++;
+        }
+        if (i != len)
+        {
+            ret = i;
+        }
+
+        return ret;
+    }
+/***************************************************************/
+    void eliminar(int vec[], int &len, int pos)
+    {
+        for (int i = pos; i < len - 1; i++)
+        {
+            vec[i] = vec[i + 1];
+        }
+        len--;
+    }

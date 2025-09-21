@@ -1,0 +1,2 @@
+Arrays -> coleccion ordenada e indexada de elementos del mismo tipo. Se pueden recuperar en cualquier orden, indicando la posicion que ocupa dentro de la estructura. 
+          Es una estructura estatica. El nombre se asocia a un area de memoria fija y consecutiva del tamaño especficado en la declaración. 

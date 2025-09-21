@@ -1,0 +1,26 @@
+#include <iostream>
+#include "principal.hpp"
+using namespace std;
+
+/*
+    Dado un vector y su len, busque e indique la posición, si se encuentra el valor 10.
+*/
+
+int main()
+{
+    int vector[10];
+    int len;
+
+    int p = buscar(vector, len, 10);
+
+    if (p == -1)
+    {
+        cout << "El valor 5 no se encuentra en el vector" << endl;
+    }
+    else
+    {
+        cout << "La posicion del valor 10 dentro del vector es " << p << endl;
+    }
+
+    return 0;
+}

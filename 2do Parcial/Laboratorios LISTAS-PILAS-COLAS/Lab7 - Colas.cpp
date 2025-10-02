@@ -16,7 +16,7 @@ Nodo *buscar(Nodo *Lista, int valor);
 int eliminarPrimerNodo(Nodo *&Lista);
 void insertarOrdenado(Nodo *&Lista, int valor); */
 
-void pasarAPila(Nodo *Lista);
+void pasarAPila(Nodo *Lista); 
 
 int main()
 {

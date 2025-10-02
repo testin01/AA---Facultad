@@ -15,8 +15,6 @@ Nodo *buscar(Nodo *Lista, int valor);
 int eliminarPrimerNodo(Nodo *&Lista);
 void insertarOrdenado(Nodo *&Lista, int valor); */
 
-void generarLista(Nodo *cfte, Nodo *cfin, Nodo *pila);
-
 int main()
 {
 

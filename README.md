@@ -26,13 +26,7 @@ Este repositorio contiene una colección de ejercicios prácticos y laboratorios
 * `2do Parcial/`: Contiene laboratorios y apuntes enfocados en listas, pilas y colas.
 * `principal.cpp`: Archivo principal utilizado para probar o ejecutar los diferentes ejercicios (puede variar según el ejercicio).
 * `principal.hpp`: Archivo de cabecera con definiciones de estructuras (como `Nodo`) y funciones comunes reutilizadas en los laboratorios.
-* `.vscode/`: Configuración para compilar y depurar con Visual Studio Code.
-
----
-
-## Compilación y Ejecución (Usando VS Code)
-
-Este repositorio incluye una configuración de tareas para VS Code (`.vscode/tasks.json`). Puedes compilar el archivo `principal.cpp` presionando `Ctrl+Shift+B` (o `Cmd+Shift+B` en Mac) si tienes configurado el task "build". El ejecutable se generará en la carpeta `build/`.
+* `.vscode/`: Configuración para compilar y depurar con Visual Studio Code en Linux Mint.
 
 ---
 

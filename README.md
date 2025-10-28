@@ -1,4 +1,5 @@
 # Algoritmos y Estructuras de Datos - Ejercicios de Cursada 📚
+## Prof.: Yamila Zakhem
 
 ## Descripción
 

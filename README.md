@@ -1,4 +1,4 @@
-# Algoritmos y Estructuras de Datos - Ejercicios de Cursada 📚 
+# Algoritmos y Estructuras de Datos - UTN.BA 📚 
 Prof.: Yamila Zakhem
 
 
